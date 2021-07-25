@@ -1,4 +1,4 @@
-# AIチュートリアル
+# AI入門（補足）
 三浦克介 <k-miura@persol-rd.co.jp>
 v1.0, 2021-07-25
 :lang: ja
@@ -34,7 +34,7 @@ AI とは、Artificial Inteligence （人口知能）の略で、人間の様な
 
 深層ニューラルネットワーク DNN とは、機械学習 Machine Learning（ML）の一種である。
 
-### 機械学習 ML とは
+## 機械学習 ML
 
 機械学習とは、ベクトル値 latexmath:[x =(x_1, x_2, \cdots, x_n)] から、離散値、スカラー値、あるいは、ベクトル値を出力する関数 latexmath:[f(x)] を考える時、この関数をいくつかの手本となる学習データから推定する手法である。
 
@@ -50,9 +50,14 @@ image::ai_application.svg[]
 
 このように、入力 latexmath:[x]、出力 latexmath:[f(x)] を数値で表し、入力 latexmath:[x] が与えられた時に、出力 latexmath:[f(x)] を求めるための、関数 latexmath:[f(x)] を、学習データから推定することが、機械学習の目的である。
 
-この目的を達成するため、機械学習では、まず、latexmath:[f(x)] として何らかの式を考える。この時、この式にいくつかのパラメータ latexmath:[p_1, p_2, \cdots, p_m] を導入する。latexmath:[f(x)] が所望の出力となるよう、学習データを用いて、パラメータ latexmath:[p_1, p_2, \cdots, p_m] を最適化する。即ち、機械学習とはパラメータ最適化問題である。
+この目的を達成するため、機械学習では、まず、latexmath:[f(x)] として何らかの式を考える。この時、この式にいくつかのパラメータ latexmath:[p_1, p_2, \cdots, p_m] を導入する。latexmath:[f(x)] が所望の出力となるよう、学習データを用いて、パラメータ latexmath:[p_1, p_2, \cdots, p_m] を最適化する。機械学習の主な関心事は、以下の二点となる。
 
+. 関数 latexmath:[f(x)] をどのような式(どのようなパラメータ)で表すか
+. 学習データを用いて、パラメータをどのようにして最適化するか（パラメータ最適化問題）
 
+## パラメータ最適化問題
+
+前節で伸びたように、機械学習とは、latexmath:[f(x)] をパラメータで表した上で、学習データを用いてパラメータを如何に最適化するかという、パラメータ最適化問題である。
 
 例として、<<fig:ai_application>> (a) の画像認識を行うため、以下の式を用いることにする（実際には、このような式では、まともな推定は行えない）。
 
@@ -60,3 +65,47 @@ image::ai_application.svg[]
 ++++
 f(x) = p_1 x_1 + p_2 x_2 + \cdots + p_n x_n + p_{n+1}
 ++++
+
+この式のパラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を、<<fig:training_data>> の学習データを用いて最適化することを考える。
+
+[[fig:training_data]]
+.学習データの例
+image::training_data.svg[]
+
+犬のラベルを0、猫のラベルを1とし、latexmath:[x^1] ～ latexmath:[x^4] は犬なので、latexmath:[f(x^1)=0], latexmath:[f(x^2)=0], latexmath:[f(x^3)=0], latexmath:[f(x^4)=0] となるように、また、latexmath:[x^5] ～ latexmath:[x^8] は猫なので、 latexmath:[f(x^5)=1], latexmath:[f(x^6)=1], latexmath:[f(x^7)=1], latexmath:[f(x^8)=1] となるように、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を最適化したい。
+
+多くの機械学習手法では、評価関数を導入し、評価関数が最大または最小となるようにパラメータの最適化を行う。評価関数の内で、誤差の最小化（完全な理想状態では0となる）を目指すものは、特に、損失関数（loss function）と呼ばれる。
+
+損失関数の代表的な例は、以下の式で表される、誤差の自乗和である。
+
+[latexmath]
+++++
+\begin{eqnarray}
+L(p_1, \cdots, p_{n+1}) & = & \sum_{i=1}^{8} |f(x^i) - l^i|^2\\
+& = & \sum_{i=1}^{8} |p_1 x^i_1 + p_2 x^i_2 + \cdots + p_n x^i_n + p_{n+1} - l^i|^2\\
+\end{eqnarray}
+++++
+
+ここで、latexmath:[l^i] は、latexmath:[i] 番目の学習データのラベルである。評価関数/誤差関数において、学習データ latexmath:[x^1] ～ latexmath:[x^8] は定数と見ることができ、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] が変数となる。
+
+上記の例では、latexmath:[f(x)] が単純な線形関数なので、最小自乗法でパラメータの最適化が可能であるが、非線形関数を含む、一般的な場合には、単純な方法では最適化は行えない。多くの機械学習では、勾配法と呼ばれる手法でパラメータの最適化を行う。
+
+勾配法によるパラメータ最適化の様子を <<fig:parameter_optimization>> に示す。ここでは、パラメータは latexmath:[p_1], latexmath:[p_2] の二つである。誤差関数 latexmath:[L(p_1, p_2)] は latexmath:[p_1], latexmath:[p_2] を変数とする関数であり、latexmath:[(p_1, p_2, L)] の三次元空間において曲面となる。パラメータ最適化は、この曲面の最下点を求める問題となる。latexmath:[p_1], latexmath:[p_2] の初期値を決め（多くの手法では、乱数により決める）、この点における曲面の勾配を求める。勾配は、latexmath:[(\partial L/\partial p_1) \vec{i_1} + (\partial L/\partial p_2) \vec{i_2}] となる。latexmath:[\vec{i_1}], latexmath:[\vec{i_2}] は、パラメータ空間における、各軸方向の単位ベクトルである（<<fig:parameter_optimization>> 中では、太字で示されている）。この勾配ベクトルを latexmath:[\alpha] 倍した分だけ、現在の点 latexmath:[(p_1, p_2)] を移動させる。latexmath:[\alpha] は学習率と呼ばれるパラメータで、latexmath:[\alpha] が大きいほど速い速度で最適点に近づくことができる反面、場合によっては、振動して収束しない場合がある。latexmath:[\alpha] を小さくすると、収束性は良くなるが、収束の速度は遅くなる。多くの手法で、latexmath:[\alpha] は動的に調整され、最初は大きく、最適点に近づくにつれて小さくされる。
+
+[[fig:parameter_optimization]]
+.勾配法によるパラメータ最適化
+image::parameter_optimization.svg[]
+
+複雑な形をした latexmath:[f(x)] においては、評価関数/誤差関数は、局所最適解（local minimum）を持つ。局所最適解とは、<<fig:local_minimum>> に於いて、左側の極小点の様な箇所である。計算過程において、局所最適解に陥ってしまうと、この場所から抜け出すことができず、真の最適解（<<fig:local_minimum>> の右側の極小点）に到達することができない。このような問題に対処するため、多くの手法では、勾配を利用しつつ、乱数を用いて確率的に現在の点を変更する手法を取り入れている。このような手法の代表的な例が、シミュレーテッドアニーリング法や、SGD（stochastic gradient descent）法と呼ばれる手法である。
+
+[[fig:local_minimum]]
+.パラメータ最適化における局所最適解問題
+image::local_minimum.svg[]
+
+## ニューラルネットワーク NN
+
+ニューラルネットワークは、機械学習の一手法である。生物の神経細胞であるニューロンの働きを模した式によって関数 latexmath:[f(x)] を構成する。
+
+[[fig:neural_network]]
+.ニューラルネットワークの構成
+image::neural_network.svg[]
