@@ -1,2 +1,62 @@
-# AI-tutorial
-AIチュートリアル
+# AIチュートリアル
+三浦克介 <k-miura@persol-rd.co.jp>
+v1.0, 2021-07-25
+:lang: ja
+:toc: left
+:toc-levels: 3
+:toc-title: 目次
+:sectnums:
+:sectnum-levels: 3
+:icons: font
+:imagesdir: Images
+:xrefstyle: short
+:figure-caption: 図
+:table-caption: 表
+:listing-caption: リスト
+:appendix-caption: 付録
+:example-caption: 例
+:source-highlighter: highlightjs
+:stem:
+
+[cols="1,1,1,3"]
+|===
+|版 |日付 |改版者 |内容
+
+|1.0 |2021-07-25 |三浦克介 |初版作成
+|===
+
+[abstract]
+本文書では、人工知能 AI (Artificial Inteligence) の概要を説明する。
+
+## AIとは
+
+AI とは、Artificial Inteligence （人口知能）の略で、人間の様な高度な知的情報処理を行う手法やシステムの総称である。以前は、エキスパートシステムと呼ばれるものが主流であったが、近年では、深層ニューラルネットワーク DNN（Deep Neural Network）を用いたものを主にAIと呼ぶ。
+
+深層ニューラルネットワーク DNN とは、機械学習 Machine Learning（ML）の一種である。
+
+### 機械学習 ML とは
+
+機械学習とは、ベクトル値 latexmath:[x =(x_1, x_2, \cdots, x_n)] から、離散値、スカラー値、あるいは、ベクトル値を出力する関数 latexmath:[f(x)] を考える時、この関数をいくつかの手本となる学習データから推定する手法である。
+
+機械学習では、入力 latexmath:[x]、出力 latexmath:[f(x)] を数値で表さなければならない。二つの応用例について、対象となるものをどのようにして数値で表すかを <<fig:ai_application>> に示す。
+
+[[fig:ai_application]]
+.機械学習の応用例：(a) 画像認識、(b) 機械翻訳
+image::ai_application.svg[]
+
+<<fig:ai_application>> (a) は、機械学習を画像認識に応用した例を示している。入力となる画像は、画素の色や明るさを数値で表すことで、ベクトル化される。出力の分類結果（この場合、「犬」と「猫」）は離散値 0, 1 で表される。このように、分類結果を離散値で表したものを、ラベルと呼ぶ。
+
+<<fig:ai_application>> (b) は、機械学習を機械翻訳に応用した例を示している。入力 latexmath:[x] および、出力 latexmath:[f(x)] となる文章は、いずれも、文字や単語が数値で表される。数値に変換するために、文字や単語と数値を対応付ける辞書が必要となる。
+
+このように、入力 latexmath:[x]、出力 latexmath:[f(x)] を数値で表し、入力 latexmath:[x] が与えられた時に、出力 latexmath:[f(x)] を求めるための、関数 latexmath:[f(x)] を、学習データから推定することが、機械学習の目的である。
+
+この目的を達成するため、機械学習では、まず、latexmath:[f(x)] として何らかの式を考える。この時、この式にいくつかのパラメータ latexmath:[p_1, p_2, \cdots, p_m] を導入する。latexmath:[f(x)] が所望の出力となるよう、学習データを用いて、パラメータ latexmath:[p_1, p_2, \cdots, p_m] を最適化する。即ち、機械学習とはパラメータ最適化問題である。
+
+
+
+例として、<<fig:ai_application>> (a) の画像認識を行うため、以下の式を用いることにする（実際には、このような式では、まともな推定は行えない）。
+
+[latexmath]
+++++
+f(x) = p_1 x_1 + p_2 x_2 + \cdots + p_n x_n + p_{n+1}
+++++
