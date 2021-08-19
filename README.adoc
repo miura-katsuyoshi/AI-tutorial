@@ -1,6 +1,6 @@
 # AI入門（補足）
 三浦克介 <k-miura@persol-rd.co.jp>
-v1.0, 2021-07-25
+v1.0, 2021-08-19
 :lang: ja
 :toc: left
 :toc-levels: 3
@@ -18,27 +18,29 @@ v1.0, 2021-07-25
 :source-highlighter: highlightjs
 :stem:
 
+[abstract]
+--
+本文書では、勉強会「AI入門」の補足説明として、人工知能 AI (Artificial Inteligence) の概要を説明する。
+--
+
 [cols="1,1,1,3"]
 |===
 |版 |日付 |改版者 |内容
 
-|1.0 |2021-07-25 |三浦克介 |初版作成
+|1.0 |2021-08-19 |三浦克介 |初版作成
 |===
-
-[abstract]
-本文書では、人工知能 AI (Artificial Inteligence) の概要を説明する。
 
 ## AIとは
 
 AI とは、Artificial Inteligence （人口知能）の略で、人間の様な高度な知的情報処理を行う手法やシステムの総称である。以前は、エキスパートシステムと呼ばれるものが主流であったが、近年では、深層ニューラルネットワーク DNN（Deep Neural Network）を用いたものを主にAIと呼ぶ。
 
-深層ニューラルネットワーク DNN とは、機械学習 Machine Learning（ML）の一種である。
+深層ニューラルネットワーク DNN とは、機械学習 ML (Machine Learning）の一種である。
 
 ## 機械学習 ML
 
-機械学習とは、ベクトル値 latexmath:[x =(x_1, x_2, \cdots, x_n)] から、離散値、スカラー値、あるいは、ベクトル値を出力する関数 latexmath:[f(x)] を考える時、この関数をいくつかの手本となる学習データから推定する手法である。
+機械学習とは、ベクトル値 latexmath:[\vec{x} =(x_1, x_2, \cdots, x_n)] から、離散値、スカラー値、あるいは、ベクトル値を出力する関数 latexmath:[f(\vec{x})] を考える時、この関数をいくつかの手本となる学習データから推定する手法である。
 
-機械学習では、入力 latexmath:[x]、出力 latexmath:[f(x)] を数値で表さなければならない。二つの応用例について、対象となるものをどのようにして数値で表すかを <<fig:ai_application>> に示す。
+機械学習では、入力 latexmath:[\vec{x}]、出力 latexmath:[f(\vec{x})] を数値で表さなければならない。二つの応用例について、対象となるものをどのようにして数値で表すかを <<fig:ai_application>> に示す。図では、 ベクトル latexmath:[\vec{x}] は、太字で示されている。
 
 [[fig:ai_application]]
 .機械学習の応用例：(a) 画像認識、(b) 機械翻訳
@@ -46,33 +48,33 @@ image::ai_application.svg[]
 
 <<fig:ai_application>> (a) は、機械学習を画像認識に応用した例を示している。入力となる画像は、画素の色や明るさを数値で表すことで、ベクトル化される。出力の分類結果（この場合、「犬」と「猫」）は離散値 0, 1 で表される。このように、分類結果を離散値で表したものを、ラベルと呼ぶ。
 
-<<fig:ai_application>> (b) は、機械学習を機械翻訳に応用した例を示している。入力 latexmath:[x] および、出力 latexmath:[f(x)] となる文章は、いずれも、文字や単語が数値で表される。数値に変換するために、文字や単語と数値を対応付ける辞書が必要となる。
+<<fig:ai_application>> (b) は、機械学習を機械翻訳に応用した例を示している。入力 latexmath:[\vec{x}] および、出力 latexmath:[f(\vec{x})] となる文章は、いずれも、文字や単語が数値で表される。数値に変換するために、文字や単語と数値を対応付ける辞書が必要となる。
 
-このように、入力 latexmath:[x]、出力 latexmath:[f(x)] を数値で表し、入力 latexmath:[x] が与えられた時に、出力 latexmath:[f(x)] を求めるための、関数 latexmath:[f(x)] を、学習データから推定することが、機械学習の目的である。
+このように、入力 latexmath:[\vec{x}]、出力 latexmath:[f(\vec{x})] を数値で表し、入力 latexmath:[\vec{x}] が与えられた時に、出力 latexmath:[f(\vec{x})] を求めるための、関数 latexmath:[f(\vec{x})] を、学習データから推定することが、機械学習の目的である。
 
-この目的を達成するため、機械学習では、まず、latexmath:[f(x)] として何らかの式を考える。この時、この式にいくつかのパラメータ latexmath:[p_1, p_2, \cdots, p_m] を導入する。latexmath:[f(x)] が所望の出力となるよう、学習データを用いて、パラメータ latexmath:[p_1, p_2, \cdots, p_m] を最適化する。機械学習の主な関心事は、以下の二点となる。
+この目的を達成するため、機械学習では、まず、latexmath:[f(\vec{x})] として何らかの式を考える。この時、この式にいくつかのパラメータ latexmath:[p_1, p_2, \cdots, p_m] を導入する。latexmath:[f(\vec{x})] が所望の出力となるよう、学習データを用いて、パラメータ latexmath:[p_1, p_2, \cdots, p_m] を最適化する。機械学習の主な関心事は、以下の二点となる。
 
-. 関数 latexmath:[f(x)] をどのような式(どのようなパラメータ)で表すか
+. 関数 latexmath:[f(\vec{x})] をどのような式(どのようなパラメータ)で表すか
 . 学習データを用いて、パラメータをどのようにして最適化するか（パラメータ最適化問題）
 
 ## パラメータ最適化問題
 
-前節で伸びたように、機械学習とは、latexmath:[f(x)] をパラメータで表した上で、学習データを用いてパラメータを如何に最適化するかという、パラメータ最適化問題である。
+前節で伸びたように、機械学習とは、latexmath:[f(\vec{x})] をパラメータで表した上で、学習データを用いてパラメータを如何に最適化するかという、パラメータ最適化問題である。
 
 例として、<<fig:ai_application>> (a) の画像認識を行うため、以下の式を用いることにする（実際には、このような式では、まともな推定は行えない）。
 
 [latexmath]
 ++++
-f(x) = p_1 x_1 + p_2 x_2 + \cdots + p_n x_n + p_{n+1}
+f(\vec{x}) = p_1 x_1 + p_2 x_2 + \cdots + p_n x_n + p_{n+1}
 ++++
 
-この式のパラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を、<<fig:training_data>> の学習データを用いて最適化することを考える。
+この式のパラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を、<<fig:training_data>> の学習データを用いて最適化することを考える。なお、図では、ベクトルは太字で示されている。
 
 [[fig:training_data]]
 .学習データの例
 image::training_data.svg[]
 
-犬のラベルを0、猫のラベルを1とし、latexmath:[x^1] ～ latexmath:[x^4] は犬なので、latexmath:[f(x^1)=0], latexmath:[f(x^2)=0], latexmath:[f(x^3)=0], latexmath:[f(x^4)=0] となるように、また、latexmath:[x^5] ～ latexmath:[x^8] は猫なので、 latexmath:[f(x^5)=1], latexmath:[f(x^6)=1], latexmath:[f(x^7)=1], latexmath:[f(x^8)=1] となるように、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を最適化したい。
+犬のラベルを0、猫のラベルを1とし、latexmath:[\vec{x}^1] ～ latexmath:[\vec{x}^4] は犬なので、latexmath:[f(\vec{x}^1)=0], latexmath:[f(\vec{x}^2)=0], latexmath:[f(\vec{x}^3)=0], latexmath:[f(\vec{x}^4)=0] となるように、また、latexmath:[\vec{x}^5] ～ latexmath:[\vec{x}^8] は猫なので、 latexmath:[f(\vec{x}^5)=1], latexmath:[f(\vec{x}^6)=1], latexmath:[f(\vec{x}^7)=1], latexmath:[f(\vec{x}^8)=1] となるように、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] を最適化したい。
 
 多くの機械学習手法では、評価関数を導入し、評価関数が最大または最小となるようにパラメータの最適化を行う。評価関数の内で、誤差の最小化（完全な理想状態では0となる）を目指すものは、特に、損失関数（loss function）と呼ばれる。
 
@@ -81,14 +83,14 @@ image::training_data.svg[]
 [latexmath]
 ++++
 \begin{eqnarray}
-L(p_1, \cdots, p_{n+1}) & = & \sum_{i=1}^{8} |f(x^i) - l^i|^2\\
+L(p_1, \cdots, p_{n+1}) & = & \sum_{i=1}^{8} |f(\vec{x}^i) - l^i|^2\\
 & = & \sum_{i=1}^{8} |p_1 x^i_1 + p_2 x^i_2 + \cdots + p_n x^i_n + p_{n+1} - l^i|^2\\
 \end{eqnarray}
 ++++
 
-ここで、latexmath:[l^i] は、latexmath:[i] 番目の学習データのラベルである。評価関数/誤差関数において、学習データ latexmath:[x^1] ～ latexmath:[x^8] は定数と見ることができ、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] が変数となる。
+ここで、latexmath:[l^i] は、latexmath:[i] 番目の学習データのラベルである。評価関数/誤差関数において、学習データ latexmath:[\vec{x}^1] ～ latexmath:[\vec{x}^8] は定数と見ることができ、パラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] が変数となる。
 
-上記の例では、latexmath:[f(x)] が単純な線形関数なので、最小自乗法でパラメータの最適化が可能であるが、非線形関数を含む、一般的な場合には、単純な方法では最適化は行えない。多くの機械学習では、勾配法と呼ばれる手法でパラメータの最適化を行う。
+上記の例では、latexmath:[f(\vec{x})] が単純な線形関数なので、最小自乗法でパラメータの最適化が可能であるが、非線形関数を含む、一般的な場合には、単純な方法では最適化は行えない。多くの機械学習では、勾配法と呼ばれる手法でパラメータの最適化を行う。
 
 勾配法によるパラメータ最適化の様子を <<fig:parameter_optimization>> に示す。ここでは、パラメータは latexmath:[p_1], latexmath:[p_2] の二つである。誤差関数 latexmath:[L(p_1, p_2)] は latexmath:[p_1], latexmath:[p_2] を変数とする関数であり、latexmath:[(p_1, p_2, L)] の三次元空間において曲面となる。パラメータ最適化は、この曲面の最下点を求める問題となる。latexmath:[p_1], latexmath:[p_2] の初期値を決め（多くの手法では、乱数により決める）、この点における曲面の勾配を求める。勾配は、latexmath:[(\partial L/\partial p_1) \vec{i_1} + (\partial L/\partial p_2) \vec{i_2}] となる。latexmath:[\vec{i_1}], latexmath:[\vec{i_2}] は、パラメータ空間における、各軸方向の単位ベクトルである（<<fig:parameter_optimization>> 中では、太字で示されている）。この勾配ベクトルを latexmath:[\alpha] 倍した分だけ、現在の点 latexmath:[(p_1, p_2)] を移動させる。latexmath:[\alpha] は学習率と呼ばれるパラメータで、latexmath:[\alpha] が大きいほど速い速度で最適点に近づくことができる反面、場合によっては、振動して収束しない場合がある。latexmath:[\alpha] を小さくすると、収束性は良くなるが、収束の速度は遅くなる。多くの手法で、latexmath:[\alpha] は動的に調整され、最初は大きく、最適点に近づくにつれて小さくされる。
 
@@ -96,7 +98,9 @@ L(p_1, \cdots, p_{n+1}) & = & \sum_{i=1}^{8} |f(x^i) - l^i|^2\\
 .勾配法によるパラメータ最適化
 image::parameter_optimization.svg[]
 
-複雑な形をした latexmath:[f(x)] においては、評価関数/誤差関数は、局所最適解（local minimum）を持つ。局所最適解とは、<<fig:local_minimum>> に於いて、左側の極小点の様な箇所である。計算過程において、局所最適解に陥ってしまうと、この場所から抜け出すことができず、真の最適解（<<fig:local_minimum>> の右側の極小点）に到達することができない。このような問題に対処するため、多くの手法では、勾配を利用しつつ、乱数を用いて確率的に現在の点を変更する手法を取り入れている。このような手法の代表的な例が、シミュレーテッドアニーリング法や、SGD（stochastic gradient descent）法と呼ばれる手法である。
+勾配法では、損失関数 latexmath:[L] をパラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] で偏微分できなければならない。このためには、latexmath:[f(\vec{x})] がパラメータ latexmath:[p_1, p_2, \cdots, p_{n+1}] で偏微分できなければならない。空間全域で偏微分可能である必要はなく、ところどころ偏微分不可能な点が存在しても構わない。
+
+複雑な形をした latexmath:[f(\vec{x})] においては、評価関数・誤差関数は、局所最適解（local minimum）を持つ。局所最適解とは、<<fig:local_minimum>> に於いて、左側の極小点の様な箇所である。計算過程において、局所最適解に陥ってしまうと、この場所から抜け出すことができず、真の最適解（<<fig:local_minimum>> の右側の極小点）に到達することができない。このような問題に対処するため、多くの手法では、勾配を利用しつつ、乱数を用いて確率的に現在の点を変更する手法を取り入れている。このような手法の代表的な例が、シミュレーテッドアニーリング法や、SGD（stochastic gradient descent）法と呼ばれる手法である。
 
 [[fig:local_minimum]]
 .パラメータ最適化における局所最適解問題
@@ -104,8 +108,221 @@ image::local_minimum.svg[]
 
 ## ニューラルネットワーク NN
 
-ニューラルネットワークは、機械学習の一手法である。生物の神経細胞であるニューロンの働きを模した式によって関数 latexmath:[f(x)] を構成する。
+ニューラルネットワークは、機械学習の一手法である。生物の神経細胞であるニューロンの働きを模した式によって関数 latexmath:[f(\vec{x})] を構成する。
+
+ニューラルネットワークの例を <<fig:neural_network>> に示す。<<fig:neural_network>> (a) は3層のニューラルネットワークの例であり、その内の一つのニューロン（図中の点線で囲まれた部分）の詳細が <<fig:neural_network>> (b) である。<<fig:neural_network>> (a) の様に多層のニューラルネットワークにおいて、最初と最後の層を除いた中間の層は、隠れ層と呼ばれる。
 
 [[fig:neural_network]]
 .ニューラルネットワークの構成
-image::neural_network.svg[]
+image::neural_network.png[]
+
+NOTE: <<fig:neural_network>> (a) の、latexmath:[x_1], latexmath:[x_2] のラベルが付けられた点を1層に数え、4層ネットワークとする呼び方もある。
+
+一つのニューロンの計算式は、次式で表される。
+
+[latexmath]
+++++
+A(\lambda) = A(b + \sum_i w_i z_i)
+++++
+
+ここで、latexmath:[z_i] はニューロンへの入力、latexmath:[b] はバイアスと呼ばれるパラメータ、latexmath:[w_i] は重みと呼ばれるパラメータである。関数 latexmath:[A(\lambda)] は活性化関数と呼ばれる非線形関数である。これに対し、latexmath:[\lambda = b + \sum_i w_i z_i] の部分は、線形関数である。
+
+活性化関数 latexmath:[A(\lambda)] としては、以前は、次式で示されるシグモイド関数がよく用いられた。
+
+[latexmath]
+++++
+A(\lambda) = \frac{1}{1+e^{-\lambda}}
+++++
+
+シグモイド関数がよく用いられた理由は、前節で述べたように、パラメータ最適化のためには微分可能である必要があり、シグモイド関数が微分しやすい為である。これに対し、近年は、次式で示される ReLU（Rectified Linear Unit）関数がよく用いられる。
+
+[latexmath]
+++++
+A(\lambda) = \max(0, \lambda)
+++++
+
+近年 ReLU 関数がよく用いられる理由は後述する。
+
+<<fig:activation_function>> に、シグモイド関数（左）および ReLU 関数（右）のグラフを示す。
+
+[[fig:activation_function]]
+.活性化関数の例
+image::activation_function.png[]
+
+## PyTorch でのNN学習・推論実行例
+
+現在よく利用されている NN (Neural Network) 学習・推論フレームワークとして、以下のものがある。なお、ここで言うフレームワークとは、ソフトウェアのライブラリである。実際に、学習・推論を行うためには、ライブラリを呼び出して処理を行うソフトウェアを作成する必要がある。以下で挙げているフレームワークは、いずれも、Python 用のライブラリである。現在、NN の分野では、Python がプログラミング言語のデファクトスタンダードとなっている。
+
+TensrFlow:: Google が開発・公開しているフレームワーク。現在、最も広く利用されている。
+PyTorch:: Facebook が開発・公開しているフレームワーク。最近、人気が高まっていて、シェアを拡大している。自然言語処理の分野では、最も人気が高い。
+Caffe:: 以前は最も良く利用されていたが、最近はシェアが低下。
+Chainer:: 日本のベンチャー起業が開発し、日本国内では人気が高かったが、2019年に開発を終了。
+
+ここでは、PyTorch を用いて、実際に NN の学習・推論を実行してみる。
+
+PyTorch を利用するためには（他のフレームワークの場合も同様に）、最低限、Python および PyTorch がインストールされた PC が必要である。加えて、大規模な NN の学習を行うためには、処理を高速化するための GPU (Graphics Processing Unit)、および、GPU を NN に使うための CUDA（Compute Unified Device Architecture) と呼ばれるライブラリ、その他の依存ライブラリが必要である。
+
+NN の分野は、現在、急激な進展を遂げており、これらのソフトウェアやライブラリも、短期間でバージョンアップされている。このため、PyTorch 等の NN フレームワークを利用するためには、必要となるソフトウェアの依存関係やバージョンを、注意深く整合させなければならず、環境の構築には手間のかかる場合が多い。
+
+PyTorch やその他の NN フレームワークを手軽に利用する方法として、 https://colab.research.google.com/[Google Colaboratory] がある。Google Colaboratory は、オンラインの PyThon プログラミング環境であり、GPU を搭載したサーバー上に、NN 学習・推論に必要なソフトウェア群がインストールされている。
+
+ここでは、Google Colaboratory 上で、NN 学習・推論を実行してみる。
+
+### 例１：線形分離可能なケース（一層ニューラルネットワーク）
+
+二次元のベクトルデータを二値に分類する問題を、一層のニューラルネットワークで解くことを考える。線形分離可能なケースを考える。
+
+本テキストと同じフォルダにある `勉強会_DNN_&_PyTorch_1.ipynb` を https://colab.research.google.com/[Google Colaboratory] にアップロードし、以下の手順で実行することができる
+
+NOTE: Google のアカウントが必要である。
+
+1. ブラウザで、https://colab.research.google.com/ を開く。
+1. ファイル -> ノートブックをアップロード -> \\192.168.10.220\share\02_FPGA\勉強会\210730_勉強会_AI.2_補足\勉強会_DNN_&_PyTorch_1.ipynb を選択し、アップロードする。
+1. ランタイム -> ランタイムのタイプを変更 -> ハードウェアアクセラレータ：GPU -> 保存
+1. ランタイム -> 全てのセルを実行
+
+<<fig:linear_separable_training_data>> に示す、線形分離可能な二次元の学習データをを用いて、二次元の入力 latexmath:[(x, y)] から二値 latexmath:[\{0, 1\}] を求める関数を推定することを考える。
+
+[[fig:linear_separable_training_data]]
+.線形分離可能な学習データの例
+image::linear_separable_training_data.png[]
+
+線形分離可能な場合、一層のニューラルネットワークで処理することが可能である。<<fig:single_layer_network>> に示す一層ニューラルネットワークで学習・推論する。
+
+[[fig:single_layer_network]]
+.一層ニューラルネットワーク
+image::single_layer_network.png[]
+
+NOTE: <<fig:single_layer_network>> では、出力がシグモイド関数となっていて、厳密には、出力は二値 latexmath:[\{0, 1\}] ではなく、0〜1の連続値となる。しかし、0.5をしきい値として二値化することで、簡単に、二値にすることができる。一般的に、このような離散値を出力させたい場合、softmax関数を用いるが、ここでは、単純な例とするため、シグモイド関数を用いている。
+
+ここで、活性化関数（シグモイド関数）の出力が latexmath:[A(\lambda)=0.5] となる、latexmath:[\lambda=0] の点を考える。 即ち、線形関数の出力が 0 となる点であるから、
+
+[latexmath]
+++++
+\lambda = b + w_1 x + w_2 y = 0
+++++
+
+となる。これを、変形すると、
+
+[latexmath]
+++++
+y = -\frac{w_1}{w_2}x - \frac{b}{w_2}
+++++
+
+となる。これは、latexmath:[x-y] 平面における直線の式であるから、パラメータ latexmath:[b], latexmath:[w_1], latexmath:[w_2] を適切に選ぶことによって、この直線により二つ領域を分離することができる。
+
+損失関数として自乗誤差を用いて学習することで、latexmath:[b= (-68.3)], latexmath:[w_1=12.7], latexmath:[w_2=14.7] 程度の値が得られる。確率的学習アルゴリズムでは、乱数が用いられるため、結果は毎回異なる。従って、二つの領域を分離する直線は、
+
+[latexmath]
+++++
+y = -0.864x + 4.65
+++++
+
+となる。結果のグラフを <<fig:result_of_training1>> に示す。左側の図において、赤丸およびバツ印は学習データを示し、背景色が推論結果を示している。青紫色の背景色が latexmath:[f(x,y)\approx 0] の領域、黄緑色の背景色が latexmath:[f(x,y)\approx 1] の領域である。右側の図は、推論結果を３次元表示したものである。うまく分離できていることが分かる。また、学習中の損失（自乗誤差）の推移を <<fig:loss_function1>> に示す。順調に学習が進んだことが分かる。
+
+[[fig:result_of_training1]]
+.一層のニューラルネットワークで線形分離可能なデータから学習・推論した結果
+image::result_of_training1.png[]
+
+[[fig:loss_function1]]
+.学習中の誤差（損失）の推移（一層のニューラルネットワークで線形分離可能なデータから学習・推論した場合）
+image::loss_function1.png[]
+
+### 例２：線形分離不可能なケース（一層ニューラルネットワーク）
+
+前節と同様に、二次元のベクトルデータを二値に分類する問題を、一層のニューラルネットワークで解くことを考える。但し、本節では、線形分離不可能なケースを考える。
+
+本節の内容は、本テキストと同じフォルダにある `勉強会_DNN_&_PyTorch_2.ipynb` を https://colab.research.google.com/[Google Colaboratory] にアップロード＆実行することで、試すことができる。
+
+前節で示したように、一層のニューラルネットワークは線形分離可能なケースには適用可能であるが、線形分離不可能な場合には適用できない。<<fig:linear_nonseparable_training_data>> に示す様な、線形分離不可能なデータから学習・推論することで、このことを示す。
+
+[[fig:linear_nonseparable_training_data]]
+.線形分離可能な学習データの例
+image::linear_nonseparable_training_data.png[]
+
+このデータを用いて、前節同様に一層のニューラルネットワークで学習・推論を行った結果を <<fig:result_of_training2>> に示す。2種類のデータを分離できていないことが分かる。学習中の損失（自乗誤差）の推移を <<fig:loss_function2>> に示す、良い解が見つからず、学習は停滞している。
+
+[[fig:result_of_training2]]
+.一層のニューラルネットワークで線形分離不可能なデータから学習・推論した結果
+image::result_of_training2.png[]
+
+[[fig:loss_function2]]
+.学習中の誤差（損失）の推移（一層のニューラルネットワークで線形分離不可能なデータから学習・推論した）
+image::loss_function2.png[]
+
+### 例２：線形分離不可能なケース（二層ニューラルネットワーク）
+
+ニューラルネットワークは、層の数を増やすことで、より複雑なデータの分離が可能であることが知られている。例として、二層のニューラルネットワークで、前節の線形分離不可能なデータから学習・推論することを考える。
+
+学習データは、前節と同じ、<<fig:linear_nonseparable_training_data>> のデータである。<<fig:dual_layer_network>> に示す二層のネットワークで学習・推論を行った。ネットワークの一層目は、活性化関数として ReLU を用いている。二層目は、シグモイド関数を用いている。
+
+[[fig:dual_layer_network]]
+.二層ニューラルネットワーク
+image::dual_layer_network.svg[]
+
+このネットワークを用い、学習・推論した結果を <<fig:result_of_training3>> に示す。うまく分離できていることが分かる。また、学習中の損失（自乗誤差）の推移を <<fig:loss_function3>> に示す。順調に学習が進んだことが分かる。
+
+[[fig:result_of_training3]]
+.二層のニューラルネットワークで線形分離不可能なデータから学習・推論した結果
+image::result_of_training3.png[]
+
+[[fig:loss_function3]]
+.学習中の誤差（損失）の推移
+image::loss_function3.png[]
+
+学習は常にうまく行くとは限らない。確率的勾配法では、勾配を利用しつつ、乱数を用いて確率的に現在の点を変更するので、実行の度に結果が異なる。順調に学習が進む場合、局所最適解に陥ってしまう場合、乱数の効果により局所最適解から脱出する場合など、様々である。本節の二層のニューラルネットワークで線形分離不可能なデータから学習・推論するケースについて、様々な学習・推論結果、ならびに、学習の際の損失の推移を <<fig:various_results_of_training3>> に示す。
+
+[[fig:various_results_of_training3]]
+.様々な学習・推論結果、ならびに、学習の際の損失の推移(二層のニューラルネットワークで線形分離不可能なデータから学習・推論するケース)
+image::various_results_of_training3.svg[]
+
+## 深層ニューラルネットワーク DNN
+
+深層ニューラルネットワーク DNN (Deep Neural Network) とは、ニューラルネットワークのうちで、層の数が概ね4層以上のものを言う。
+
+### 勾配消失問題とReLU関数
+
+ニューラルネットワークの歴史は比較的長く、最初に提案されたのは1958年である。その後、何度か、ニューラルネットワークがブームとなったものの、2000年ごろまでは実用的に使われることは少なかった。その理由は、ニューラルネットワークの層数を増やせばより複雑な問題を解くことができることは分かっていたものの、層数が3を超えるあたりから、学習がうまく進まなくなるという課題があったためである。
+
+合成関数 latexmath:[g(f(x))] の微分は、
+
+[latexmath]
+++++
+\frac{d}{dx}g(f(x)) = g'(f(x))\cdot f'(x)
+++++
+
+であるから、ニューラルネットワークの様に関数が何層も入れ子になっていると、その微分は、各層の微分の積となる。
+
+ここで、シグモイド関数と ReLU 関数の微分を <<fig:diff_activation_function>> に示す。
+
+[[fig:diff_activation_function]]
+.シグモイド関数（左）と ReLU 関数（右）の微分
+image::diff_activation_function.png[]
+
+シグモイド関数の微係数は、最大で 0.25 である。これを何層も積み重ねると、全体としての微係数はその積となり、総数が概ね4層以上になると、微係数がほぼ0となってしまう。こうなると、勾配法によるパラメータの最適化ができなくなってしまう。この問題は「勾配消失問題」と呼ばれ、長らく、ニューラルネットワークの層数が3を超えられなかった主要因であった。
+
+勾配消失問題を解消する方法として提案されたのが、ReLU 関数である。ReLU 関数の微係数は1であり（latexmath:[x>0] の領域）、これが何層も積み重なっても勾配消失が起きない（latexmath:[x>0] の領域であれば）。ReLU 関数の導入によって、4層以上の DNN でも学習が可能となった。
+
+### ハードウェアアクセラレータの利用
+
+以下の式に示す一つのニューロンでの計算式から分かるように、ニューラルネットワークの大部分は積和演算である。
+
+[latexmath]
+++++
+A(\lambda) = A(b + \sum_i w_i z_i)
+++++
+
+このような積和演算は、信号画像処理の分野でも多用される。この分野では、DSP (Digital Signal Processor) や GPU (Graphics Processing Unit) 等のハードウェアアクセラレータを用いて処理の高速化が図られていた。これらのハードウェアを DNN の演算に応用して、DNN 学習・推論を高速化させるようになり、特に GPU は、画像処理という本来の目的から離れ、GPGPU (General Purpose Graphics Processing Unit) と呼ばれる製品が誕生し、利用されるようになった。
+
+NOTE: GPU は HDMI 等の映像を出力するポートを持つが、GPGPU はこれを持たない。
+
+FPGA (Field Programmable Gate Array) も、近年、DNN 演算に利用されるようになっている。
+
+このようなハードウェアの進化により、学習可能な DNN の層数が更に増加した。
+
+### DNN による AI ブームの到来
+
+ReLU 関数の導入、ハードウェアアクセラレータの利用など、2000年代に幾つかのブレイクスルーとなる技術革新があり、DNN の層数が劇的に増加した。2012年には、画像処理に DNN を応用したトロント大学のチームが、画像認識の精度を競う世界大会 ILSVRC (Imagenet Large Scale Visual Recognition Challenge) において大差で勝利し、世界に衝撃を与えた。また、2014年には、DNN を用いた囲碁ソフトであるアルファ碁が世界チャンピオンに勝利し、話題となった。これらのエポックメイキングな事象によって、DNN が世界的に注目されるようになり、DNN による AI ブームが到来した。
+
+現在では、DNN は、画像処理、音声処理、自然言語処理、制御、状況分析、意思決定等、様々な分野に応用されている。
+
